@@ -1,11 +1,12 @@
 from turtle import Turtle
 
-START_POS = [(0, 0), (-20, 0), (-40, 0)]
+START_POS = [(0, 0), (-10, 0), (-20, 0)]
 
 
-class Snake:
+class Snake(Turtle):
 
     def __init__(self):
+        super().__init__()
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
@@ -14,6 +15,7 @@ class Snake:
         for position in START_POS:
             segment = Turtle("square")
             segment.color('white')
+            segment.shapesize(.5, .5)
             segment.penup()
             segment.goto(position)
             self.segments.append(segment)
@@ -23,7 +25,7 @@ class Snake:
             new_x = self.segments[seg_num - 1].xcor()
             new_y = self.segments[seg_num - 1].ycor()
             self.segments[seg_num].goto(new_x, new_y)
-        self.head.forward(20)
+        self.head.forward(10)
 
     def up(self):
         if self.head.heading() != 270:
@@ -44,3 +46,10 @@ class Snake:
         if self.head.heading() != 180:
             self.head.seth(0)
             # self.move()
+
+    def tailIncrease(self):
+        new_segment = Turtle("square")
+        new_segment.color('white')
+        new_segment.shapesize(.5, .5)
+        new_segment.penup()
+        self.segments.append(new_segment)
